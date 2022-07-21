@@ -1,0 +1,46 @@
+
+<html lang="en">
+    <head>
+        <title>TODO LIST</title>
+        <style>
+            
+            table, th, td{
+                border: 1px solid black;
+            }
+            .container{
+                border: 1px solid black;
+                width: fit-content;
+                margin-left: 500px;
+                margin-top: 50px;
+                background-color:beige;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h3>TODO App</h3>
+            <form method="POST" action="/">
+                {% csrf_token %}
+                {{form.title}}
+                <input type="submit" name="submit">
+            </form>            
+            <div>
+                <table style="border: 1px solid black;">
+                    <tr>
+                        <th>Item</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{item}}</td>
+                        <td><a href="{% url 'update_task' item.id %}">Update</a></td>
+                        <td><a href="{% url 'delete_task' item.id %}">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </body>
+    </html>
+    
